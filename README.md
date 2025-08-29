@@ -55,7 +55,13 @@ Apresentamos uma plataforma de gestão completa, projetada para profissionais au
     -   **Administrador:** acesso total. 
     -   **Prestador:** acesso restrito à sua própria agenda (criação/aprovação de agendamentos) e sem acesso a relatórios. 
     -   **Cliente:** acesso restrito aos seus próprios dados e agendamentos. 
--   **RF028:** O sistema deve permitir que o **Administrador** crie, edite e gerencie usuários do tipo **Prestador**. 
+-   **RF028:** O sistema deve permitir que o **Administrador** crie, edite e gerencie usuários do tipo **Prestador**.
+
+
+## Modelo conceitual do banco de dados
+
+![Modelo conceitual do banco de dados representando as relações entre as entidades
+que estarao presentes no modulo de consultas](resources/ModeloConceitual.drawio.svg)
 
 ## Sprint Backlog - Módulo de Agendamento (Sprint 1) 
 
