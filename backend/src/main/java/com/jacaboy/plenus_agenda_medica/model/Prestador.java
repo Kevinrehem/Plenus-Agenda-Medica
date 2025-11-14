@@ -1,11 +1,10 @@
 package com.jacaboy.plenus_agenda_medica.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -23,4 +22,12 @@ public class Prestador extends Usuario {
 
     @Column
     private String crbm;
+
+    @OneToMany(mappedBy = "prestador", fetch = FetchType.LAZY)
+    List<Agendamento> agendamentos;
+
+    @Column
+    @ManyToMany(cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
+    private List<Procedimento> procedimentosDisponiveis;
+
 }

@@ -1,11 +1,11 @@
 package com.jacaboy.plenus_agenda_medica.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.boot.context.properties.source.MapConfigurationPropertySource;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper=true)
 @Entity
@@ -19,5 +19,8 @@ import lombok.experimental.SuperBuilder;
 public class Paciente extends Usuario {
     @Column
     Boolean ehDevedor;
+
+    @OneToMany(mappedBy = "paciente",  fetch = FetchType.LAZY)
+    List<Agendamento> agendamentos;
 
 }

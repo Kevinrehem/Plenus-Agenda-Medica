@@ -21,7 +21,7 @@ public abstract class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true, updatable = false)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String nome;
