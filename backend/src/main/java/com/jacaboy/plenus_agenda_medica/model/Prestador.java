@@ -30,4 +30,8 @@ public class Prestador extends Usuario {
     @ManyToMany(cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
     private List<Procedimento> procedimentosDisponiveis;
 
+    @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Disponibilidade disponibilidade;
+
 }

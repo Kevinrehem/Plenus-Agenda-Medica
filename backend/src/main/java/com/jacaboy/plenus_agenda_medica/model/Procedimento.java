@@ -43,6 +43,8 @@ public class Procedimento {
     @ManyToMany(mappedBy = "procedimentosSolicitados",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Agendamento> agendamentos;
 
+
+
     @Column(nullable=false)
     private Timestamp createdAt;
 

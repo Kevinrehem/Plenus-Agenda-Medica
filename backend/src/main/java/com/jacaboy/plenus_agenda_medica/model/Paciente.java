@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "pacientes")
 @PrimaryKeyJoinColumn(name = "usuario_id")
 public class Paciente extends Usuario {
-    @Column
+    @Column(nullable = false)
     Boolean ehDevedor;
 
     @OneToMany(mappedBy = "paciente",  fetch = FetchType.LAZY)

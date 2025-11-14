@@ -24,6 +24,8 @@ public class SecurityConfig {
                 // 3. Define as regras de autorização
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/v1/admin/create").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/patient/create").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/availability/create").permitAll()
                         .anyRequest().authenticated()
                 );
 
