@@ -4,6 +4,8 @@ import com.jacaboy.plenus_agenda_medica.model.enums.CategoriaProcedimento;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -42,13 +44,13 @@ public class Procedimento {
     private List<Agendamento> agendamentos;
 
     @Column(nullable=false)
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
 
     @Column
-    private LocalDateTime updatedAt;
+    private Timestamp updatedAt;
 
     @Column
-    private LocalDateTime deletedAt;
+    private Timestamp deletedAt;
 
 }
 

@@ -3,6 +3,7 @@ package com.jacaboy.plenus_agenda_medica.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class Agendamento {
     private Prestador prestador;
 
     @Column(nullable=false)
-    private LocalDateTime dataConsulta;
+    private Timestamp dataConsulta;
 
     @Column(nullable=false)
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -41,11 +42,11 @@ public class Agendamento {
     private int tempoEstimado;
 
     @Column(nullable=false)
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
 
     @Column
-    private LocalDateTime updatedAt;
+    private Timestamp updatedAt;
 
     @Column
-    private LocalDateTime deletedAt;
+    private Timestamp deletedAt;
 }

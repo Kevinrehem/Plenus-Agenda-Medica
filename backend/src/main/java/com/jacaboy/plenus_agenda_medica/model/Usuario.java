@@ -5,6 +5,8 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -39,21 +41,19 @@ public abstract class Usuario {
     private String cpf;
 
     @Column(nullable = false, updatable = false)
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
+
+    @Column(nullable = false)
+    private Timestamp createdAt;
 
     @Column
-    private LocalDateTime createdAt;
+    private Timestamp updatedAt;
 
     @Column
-    private LocalDateTime updatedAt;
-
-    @Column
-    private LocalDateTime deletedAt;
+    private Timestamp deletedAt;
 
     @Column
     private Boolean ativo;
-
-
 
     @Column
     private String senha;
