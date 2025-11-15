@@ -1,4 +1,4 @@
-package com.jacaboy.plenus_agenda_medica.dto.Prestador;
+package com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador;
 
 import com.jacaboy.plenus_agenda_medica.dto.Disponibilidade.DisponibilidadeCreateDTO;
 

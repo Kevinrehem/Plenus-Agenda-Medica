@@ -1,4 +1,4 @@
-package com.jacaboy.plenus_agenda_medica.dto.Admin;
+package com.jacaboy.plenus_agenda_medica.dto.Usuario.Admin;
 
 public record AdminCreateDTO(String nome,
                              String email,

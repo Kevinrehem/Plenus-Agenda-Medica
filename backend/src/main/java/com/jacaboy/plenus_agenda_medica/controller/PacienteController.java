@@ -1,7 +1,7 @@
 package com.jacaboy.plenus_agenda_medica.controller;
 
-import com.jacaboy.plenus_agenda_medica.dto.Paciente.PacienteCreateDTO;
-import com.jacaboy.plenus_agenda_medica.service.UsuarioService;
+import com.jacaboy.plenus_agenda_medica.dto.Usuario.Paciente.PacienteCreateDTO;
+import com.jacaboy.plenus_agenda_medica.service.PacienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/patient")
 public class PacienteController {
 
-    private UsuarioService usuarioService;
+    private PacienteService pacienteService;
 
-    public PacienteController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
+    public PacienteController(PacienteService pacienteService) {
+        this.pacienteService = pacienteService;
     }
 
     @PostMapping("/create")
     public ResponseEntity<?> createPaciente(@RequestBody PacienteCreateDTO request){
-        boolean response = usuarioService.createPaciente(request);
+        boolean response = pacienteService.createPaciente(request);
         if(response){
             return ResponseEntity.status(HttpStatus.CREATED).body("Patient " + request.nome() + " created successfully");
         }else{
