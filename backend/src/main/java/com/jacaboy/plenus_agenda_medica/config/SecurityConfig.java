@@ -28,6 +28,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/availability/create").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/professional/create").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/user/select-all").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/procedure/create").permitAll()
                         .anyRequest().authenticated()
                 );
 
