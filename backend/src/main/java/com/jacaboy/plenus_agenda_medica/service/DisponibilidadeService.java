@@ -19,9 +19,9 @@ public class DisponibilidadeService {
     }
 
     @Transactional
-    public boolean createDisponibilidade(DisponibilidadeCreateDTO request){
-        if(request==null) return false;
-        if(request.horario_inicio().length!=7 || request.horario_fim().length!=7) return false;
+    public Long createDisponibilidade(DisponibilidadeCreateDTO request){
+        if(request==null) return -1L;
+        if(request.horario_inicio().length!=7 || request.horario_fim().length!=7) return -1L;
         LocalTime[] horarioInicio = new LocalTime[7];
         LocalTime[] horarioFim = new LocalTime[7];
         for(int i=0;i<7;i++){
@@ -33,7 +33,8 @@ public class DisponibilidadeService {
                 .horarioFim(horarioFim)
                 .build();
         disponibilidadeRepository.save(disponibilidade);
-        return true;
+
+        return disponibilidade.getId();
     }
 
 }

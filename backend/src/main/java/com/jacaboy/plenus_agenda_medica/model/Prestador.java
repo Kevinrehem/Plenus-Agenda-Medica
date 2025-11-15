@@ -17,9 +17,6 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "usuario_id")
 public class Prestador extends Usuario {
 
-    @Column(nullable = false, name = "horario_trabalho")
-    private String horario;
-
     @Column
     private String crbm;
 
