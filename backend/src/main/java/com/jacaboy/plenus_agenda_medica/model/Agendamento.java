@@ -32,7 +32,10 @@ public class Agendamento {
     private Prestador prestador;
 
     @Column(nullable=false)
-    private Timestamp dataConsulta;
+    private Timestamp inicioConsulta;
+
+    @Column(nullable = false)
+    private Timestamp fimConsulta;
 
     @Column(nullable=false)
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -1,4 +1,4 @@
-package com.jacaboy.plenus_agenda_medica.config; // (ou onde quer que suas configs fiquem)
+package com.jacaboy.plenus_agenda_medica.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +23,10 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // 3. Define as regras de autorização
                 .authorizeHttpRequests(auth -> auth
+                        // Liberação do Swagger/OpenAPI
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+                        // Suas regras existentes
                         .requestMatchers(HttpMethod.POST, "/api/v1/admin/create").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/patient/create").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/availability/create").permitAll()
