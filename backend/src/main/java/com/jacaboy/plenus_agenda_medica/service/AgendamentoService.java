@@ -69,6 +69,8 @@ public class AgendamentoService {
                 .inicioConsulta(Timestamp.valueOf(inicioConsulta))
                 .fimConsulta(Timestamp.valueOf(inicioConsulta.plusMinutes(tempoEstimado))) // inicio consulta + tempoEstimado minutos
                 .build();
+
+        if(agendamentoRepository.temConflito(agendamento)) return false ;
         agendamentoRepository.save(agendamento);
         return true;
     }
