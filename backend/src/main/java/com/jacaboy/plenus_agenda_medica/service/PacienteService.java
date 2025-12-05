@@ -1,6 +1,8 @@
 package com.jacaboy.plenus_agenda_medica.service;
 
 import com.jacaboy.plenus_agenda_medica.dto.Usuario.Paciente.PacienteCreateDTO;
+import com.jacaboy.plenus_agenda_medica.dto.Usuario.Paciente.PacienteGetDTO;
+import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorGetDTO;
 import com.jacaboy.plenus_agenda_medica.model.Paciente;
 import com.jacaboy.plenus_agenda_medica.repository.PacienteRepository;
 import org.springframework.stereotype.Service;
@@ -50,4 +52,20 @@ public class PacienteService {
         return true;
 
     }
+
+    public PacienteGetDTO convertToGetDTO(Paciente paciente){
+        return new PacienteGetDTO(
+                paciente.getId(),
+                paciente.getNome(),
+                paciente.getEmail(),
+                paciente.getTelefone(),
+                paciente.getTelefone2(),
+                paciente.getCpf(),
+                paciente.getDataNascimento().toString(),
+                paciente.getCreatedAt().toString(),
+                paciente.getAtivo(),
+                paciente.getEhDevedor()
+        );
+    }
+
 }

@@ -1,7 +1,10 @@
 package com.jacaboy.plenus_agenda_medica.service;
 
+import com.jacaboy.plenus_agenda_medica.dto.Procedimento.ProcedimentoGetDTO;
 import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorCreateDTO;
+import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorGetDTO;
 import com.jacaboy.plenus_agenda_medica.model.Prestador;
+import com.jacaboy.plenus_agenda_medica.model.Procedimento;
 import com.jacaboy.plenus_agenda_medica.repository.DisponibilidadeRepository;
 import com.jacaboy.plenus_agenda_medica.repository.PrestadorRepository;
 import com.jacaboy.plenus_agenda_medica.repository.ProcedimentoRepository;
@@ -11,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class PrestadorService {
@@ -20,17 +25,20 @@ public class PrestadorService {
     private final DisponibilidadeService disponibilidadeService;
     private final DisponibilidadeRepository disponibilidadeRepository;
     private final ProcedimentoRepository procedimentoRepository;
+    private final ProcedimentoService procedimentoService;
 
     public PrestadorService(
             PrestadorRepository prestadorRepository,
             DisponibilidadeRepository disponibilidadeRepository,
             ProcedimentoRepository procedimentoRepository,
-            DisponibilidadeService disponibilidadeService
+            DisponibilidadeService disponibilidadeService,
+            ProcedimentoService procedimentoService
     ) {
         this.prestadorRepository = prestadorRepository;
         this.disponibilidadeService = disponibilidadeService;
         this.procedimentoRepository = procedimentoRepository;
         this.disponibilidadeRepository = disponibilidadeRepository;
+        this.procedimentoService = procedimentoService;
     }
 
     @Transactional
@@ -79,4 +87,28 @@ public class PrestadorService {
         // Se chegou aqui é porque deu certo, retorna true
         return true;
     }
+
+
+    public PrestadorGetDTO convertToGetDTO(Prestador prestador){
+        List<ProcedimentoGetDTO> procedimentosDisponiveis = new ArrayList<>();
+        for(Procedimento procedimento : prestador.getProcedimentosDisponiveis()){
+            procedimentosDisponiveis.add(procedimentoService.convertToGetDTO(procedimento));
+        }
+
+        PrestadorGetDTO response = new PrestadorGetDTO(
+                prestador.getId(),
+                prestador.getNome(),
+                prestador.getEmail(),
+                prestador.getTelefone(),
+                prestador.getTelefone2(),
+                prestador.getCpf(),
+                prestador.getDataNascimento().toString(),
+                prestador.getCreatedAt().toString(),
+                prestador.getAtivo(),
+                prestador.getCrbm(),
+                procedimentosDisponiveis
+        );
+        return response;
+    }
+
 }

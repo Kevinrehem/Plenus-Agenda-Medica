@@ -23,9 +23,9 @@ public class DisponibilidadeController {
     public ResponseEntity<?> createDisponibilidade(@RequestBody DisponibilidadeCreateDTO request){
         Long response = disponibilidadeService.createDisponibilidade(request);
         if(response<0L){
-            return ResponseEntity.status(HttpStatus.CREATED).body("Horário cadastrado com sucesso");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar horário");
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar horário");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Horário cadastrado com sucesso");
     }
 
 }

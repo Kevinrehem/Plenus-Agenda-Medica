@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Repository
 public interface AgendamentoRepository extends JpaRepository<Agendamento,Long> {
@@ -31,6 +32,16 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento,Long> {
 
     default boolean temConflito(Agendamento request) {
         Long idVerificacao = (request.getId() != null) ? request.getId() : -1L;
+
+        int weekDay = request.getInicioConsulta().toLocalDateTime().getDayOfWeek().getValue()-1;
+        LocalTime consultaInicio = request.getInicioConsulta().toLocalDateTime().toLocalTime();
+        LocalTime consultaFim = request.getFimConsulta().toLocalDateTime().toLocalTime();
+
+        if(consultaInicio.isAfter(consultaFim)) return true;
+        if(request.getPrestador().getDisponibilidade().getHorarioInicio() == request.getPrestador().getDisponibilidade().getHorarioFim()) return true;
+        if(consultaInicio.isBefore(request.getPrestador().getDisponibilidade().getHorarioInicio()[weekDay])) return true;
+        if(consultaFim.isAfter(request.getPrestador().getDisponibilidade().getHorarioFim()[weekDay])) return true;
+
         return conflitaAgendamento(
                 request.getInicioConsulta().toLocalDateTime(),
                 request.getFimConsulta().toLocalDateTime(),

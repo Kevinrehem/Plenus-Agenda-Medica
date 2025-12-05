@@ -1,4 +1,15 @@
 package com.jacaboy.plenus_agenda_medica.dto.Agendamento;
 
-public record AgendamentoGetDTO() {
+import com.jacaboy.plenus_agenda_medica.dto.Procedimento.ProcedimentoGetDTO;
+import com.jacaboy.plenus_agenda_medica.dto.Usuario.Paciente.PacienteGetDTO;
+import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorGetDTO;
+
+import java.util.List;
+
+public record AgendamentoGetDTO(
+        PrestadorGetDTO prestador,
+        PacienteGetDTO paciente,
+        String data_consulta,
+        List<ProcedimentoGetDTO> procedimentos
+) {
 }

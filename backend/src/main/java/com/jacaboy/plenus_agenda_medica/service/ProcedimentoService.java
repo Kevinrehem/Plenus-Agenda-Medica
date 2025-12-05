@@ -1,6 +1,7 @@
 package com.jacaboy.plenus_agenda_medica.service;
 
 import com.jacaboy.plenus_agenda_medica.dto.Procedimento.ProcedimentoCreateDTO;
+import com.jacaboy.plenus_agenda_medica.dto.Procedimento.ProcedimentoGetDTO;
 import com.jacaboy.plenus_agenda_medica.model.Procedimento;
 import com.jacaboy.plenus_agenda_medica.repository.PacienteRepository;
 import com.jacaboy.plenus_agenda_medica.repository.ProcedimentoRepository;
@@ -34,6 +35,16 @@ public class ProcedimentoService {
                 .build();
         procedimentoRepository.save(procedimento);
         return true;
+    }
+
+    public ProcedimentoGetDTO convertToGetDTO(Procedimento procedimento){
+        return new ProcedimentoGetDTO(
+                procedimento.getId(),
+                procedimento.getNome(),
+                procedimento.getDescricao(),
+                procedimento.getCategoria().toString(),
+                procedimento.getTempoEstimado()
+        );
     }
 
 }
