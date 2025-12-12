@@ -1,11 +1,15 @@
 package com.jacaboy.plenus_agenda_medica.controller;
 
 import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorCreateDTO;
+import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorGetDTO;
 import com.jacaboy.plenus_agenda_medica.service.PrestadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -26,6 +30,13 @@ public class PrestadorController {
             return ResponseEntity.status(HttpStatus.CREATED).body("Prestador " + request.nome() +  " created successfully");
         }
         return ResponseEntity.badRequest().body("Prestador " + request.nome() + " couldn't be created");
+    }
+
+    @GetMapping("/select-all")
+    public ResponseEntity<List<PrestadorGetDTO>> getPrestadores(){
+        List<PrestadorGetDTO> response = prestadorService.findAllPrestadores();
+        if(response.isEmpty()) return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 }

@@ -88,6 +88,17 @@ public class PrestadorService {
         return true;
     }
 
+    @Transactional
+    public List<PrestadorGetDTO> findAllPrestadores(){
+        List<Prestador> prestadores = prestadorRepository.findAll().stream().toList();
+        if(prestadores.isEmpty()) return null;
+        List<PrestadorGetDTO> result = new ArrayList<>();
+        for(Prestador prestador : prestadores){
+            result.add(convertToGetDTO(prestador));
+        }
+        return result;
+    }
+
 
     public PrestadorGetDTO convertToGetDTO(Prestador prestador){
         List<ProcedimentoGetDTO> procedimentosDisponiveis = new ArrayList<>();
