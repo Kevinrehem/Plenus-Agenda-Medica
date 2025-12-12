@@ -2,7 +2,6 @@ package com.jacaboy.plenus_agenda_medica.controller;
 
 import com.jacaboy.plenus_agenda_medica.dto.Agendamento.AgendamentoCreateDTO;
 import com.jacaboy.plenus_agenda_medica.dto.Agendamento.AgendamentoGetDTO;
-import com.jacaboy.plenus_agenda_medica.model.Agendamento;
 import com.jacaboy.plenus_agenda_medica.service.AgendamentoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

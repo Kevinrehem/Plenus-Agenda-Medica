@@ -23,6 +23,13 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // 3. Define as regras de autorização
                 .authorizeHttpRequests(auth -> auth
+                        // LIBERA O SWAGGER E OS RECURSOS DELE
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
+                        // LIBERA REQUESTS AUTENTICADAS
                         .anyRequest().authenticated()
                 )
                 // 4. Habilita Auth button
@@ -31,8 +38,8 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
+    /* @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
+    }*/
 }
