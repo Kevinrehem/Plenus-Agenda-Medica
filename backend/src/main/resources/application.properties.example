@@ -1,0 +1,35 @@
+spring.application.name=plenus-agenda-medica
+spring.servlet.multipart.max-file-size=100MB
+spring.servlet.multipart.max-request-size=100MB
+
+# --- EXEMPLOS DE CONFIGURAÇÃO DE BANCO DE DADOS ---
+# Escolha qual ambiente vai usar e preencha as credenciais reais no application.properties
+
+# 1. Configuração - AMBIENTE ACADÊMICO (Exemplo)
+# spring.datasource.url=jdbc:postgresql://IP_DO_BANCO:5432/NOME_DO_BANCO
+# spring.datasource.username=usuario_academico
+# spring.datasource.password=senha_academica
+
+# 2. Configuração - DESENVOLVIMENTO LOCAL (localhost)
+# spring.datasource.url=jdbc:postgresql://127.0.0.1:5432/PlenusAgenda
+# spring.datasource.username=postgres
+# spring.datasource.password=sua_senha_local
+
+# 3. Configuração - PRODUÇÃO (Supabase/Cloud)
+# Mantive os parâmetros de SSL do Supabase pois são importantes
+spring.datasource.url=jdbc:postgresql://HOST_DO_SUPABASE:6543/postgres?sslmode=require&prepareThreshold=0
+spring.datasource.username=seu_usuario_prod
+spring.datasource.password=sua_senha_prod
+
+# --- SEGURANÇA ---
+spring.security.user.name=admin
+# IMPORTANTE: Nunca commite a senha real de produção aqui
+spring.security.user.password=sua_senha_admin_secreta
+
+server.port=8081
+
+spring.jpa.show-sql=true
+
+# Cuidado com ddl-auto=update em produção (pode alterar tabelas automaticamente)
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
