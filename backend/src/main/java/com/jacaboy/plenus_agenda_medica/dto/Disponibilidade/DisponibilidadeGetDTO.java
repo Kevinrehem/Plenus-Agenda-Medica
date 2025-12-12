@@ -1,4 +1,10 @@
 package com.jacaboy.plenus_agenda_medica.dto.Disponibilidade;
 
-public record DisponibilidadeGetDTO() {
+import java.time.LocalTime;
+
+public record DisponibilidadeGetDTO(
+        Long id,
+        LocalTime[] horario_inicio,
+        LocalTime[] horario_fim
+) {
 }

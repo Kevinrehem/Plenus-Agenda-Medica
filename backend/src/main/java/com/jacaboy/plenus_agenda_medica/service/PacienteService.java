@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PacienteService {
@@ -51,6 +53,17 @@ public class PacienteService {
         pacienteRepository.save(newPaciente);
         return true;
 
+    }
+
+    @Transactional
+    public List<PacienteGetDTO> findAllPacientes(){
+        List<Paciente> pacientes = pacienteRepository.findAll();
+        if (pacientes.isEmpty()) return null;
+        List<PacienteGetDTO> response = new ArrayList<>();
+        pacientes.forEach(paciente -> {
+           response.add(convertToGetDTO(paciente));
+        });
+        return response;
     }
 
     public PacienteGetDTO convertToGetDTO(Paciente paciente){

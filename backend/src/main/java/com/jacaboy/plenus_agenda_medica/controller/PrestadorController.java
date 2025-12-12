@@ -33,7 +33,7 @@ public class PrestadorController {
     }
 
     @GetMapping("/select-all")
-    public ResponseEntity<List<PrestadorGetDTO>> getPrestadores(){
+    public ResponseEntity<List<PrestadorGetDTO>> findAllPrestadores(){
         List<PrestadorGetDTO> response = prestadorService.findAllPrestadores();
         if(response.isEmpty()) return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         return ResponseEntity.status(HttpStatus.OK).body(response);

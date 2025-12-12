@@ -1,10 +1,13 @@
 package com.jacaboy.plenus_agenda_medica.controller;
 
 import com.jacaboy.plenus_agenda_medica.dto.Usuario.Paciente.PacienteCreateDTO;
+import com.jacaboy.plenus_agenda_medica.dto.Usuario.Paciente.PacienteGetDTO;
 import com.jacaboy.plenus_agenda_medica.service.PacienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -25,6 +28,14 @@ public class PacienteController {
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Patient " + request.nome() + " could not be created");
         }
+    }
+
+    @GetMapping("/select-all")
+    public ResponseEntity<List<PacienteGetDTO>> selectAllPaciente(){
+        List<PacienteGetDTO> response = pacienteService.findAllPacientes();
+        if(response == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 }

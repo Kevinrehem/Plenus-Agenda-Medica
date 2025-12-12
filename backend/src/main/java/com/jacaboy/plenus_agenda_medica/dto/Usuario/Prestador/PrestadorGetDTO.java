@@ -1,5 +1,6 @@
 package com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador;
 
+import com.jacaboy.plenus_agenda_medica.dto.Disponibilidade.DisponibilidadeGetDTO;
 import com.jacaboy.plenus_agenda_medica.dto.Procedimento.ProcedimentoGetDTO;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public record PrestadorGetDTO(
         String createdAt,
         Boolean ativo,
         String crbm,
+        DisponibilidadeGetDTO disponibilidade,
         List<ProcedimentoGetDTO> procedimentosDisponiveis
 ) {
 }

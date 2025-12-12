@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ProcedimentoService {
@@ -35,6 +37,17 @@ public class ProcedimentoService {
                 .build();
         procedimentoRepository.save(procedimento);
         return true;
+    }
+
+    @Transactional
+    public List<ProcedimentoGetDTO> findAllProcedimentos(){
+        List<Procedimento> procedimentos = procedimentoRepository.findAll();
+        if(procedimentos.isEmpty()) return null;
+        List<ProcedimentoGetDTO> response = new ArrayList<>();
+        procedimentos.forEach(procedimento -> {
+            response.add(convertToGetDTO(procedimento));
+        });
+        return response;
     }
 
     public ProcedimentoGetDTO convertToGetDTO(Procedimento procedimento){

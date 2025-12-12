@@ -1,8 +1,10 @@
 package com.jacaboy.plenus_agenda_medica.service;
 
+import com.jacaboy.plenus_agenda_medica.dto.Disponibilidade.DisponibilidadeGetDTO;
 import com.jacaboy.plenus_agenda_medica.dto.Procedimento.ProcedimentoGetDTO;
 import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorCreateDTO;
 import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorGetDTO;
+import com.jacaboy.plenus_agenda_medica.model.Disponibilidade;
 import com.jacaboy.plenus_agenda_medica.model.Prestador;
 import com.jacaboy.plenus_agenda_medica.model.Procedimento;
 import com.jacaboy.plenus_agenda_medica.repository.DisponibilidadeRepository;
@@ -106,6 +108,7 @@ public class PrestadorService {
             procedimentosDisponiveis.add(procedimentoService.convertToGetDTO(procedimento));
         }
 
+
         PrestadorGetDTO response = new PrestadorGetDTO(
                 prestador.getId(),
                 prestador.getNome(),
@@ -117,6 +120,7 @@ public class PrestadorService {
                 prestador.getCreatedAt().toString(),
                 prestador.getAtivo(),
                 prestador.getCrbm(),
+                disponibilidadeService.convertToGetDTO(prestador.getDisponibilidade()),
                 procedimentosDisponiveis
         );
         return response;
