@@ -114,6 +114,16 @@ public class AgendamentoService {
         return response;
     }
 
+    @Transactional
+    public AgendamentoGetDTO findAgendamentoById(Long id){
+        Agendamento agendamento = agendamentoRepository.findById(id).orElse(null);
+        if(agendamento == null){
+            return  null;
+        }
+        return convertToGetDTO(agendamento);
+    }
+
+
     public AgendamentoGetDTO convertToGetDTO(Agendamento agendamento){
         PrestadorGetDTO prestador = prestadorService.convertToGetDTO(agendamento.getPrestador());
         PacienteGetDTO paciente = pacienteService.convertToGetDTO(agendamento.getPaciente());
@@ -124,10 +134,11 @@ public class AgendamentoService {
         }
 
         return new AgendamentoGetDTO(
-          prestador,
-          paciente,
-          agendamento.getInicioConsulta().toString(),
-          procedimentos
+                agendamento.getId(),
+                prestador,
+                paciente,
+                agendamento.getInicioConsulta().toString(),
+                procedimentos
         );
     }
 

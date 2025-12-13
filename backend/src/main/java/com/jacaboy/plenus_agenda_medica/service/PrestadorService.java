@@ -101,6 +101,12 @@ public class PrestadorService {
         return result;
     }
 
+    @Transactional
+    public PrestadorGetDTO findPrestadorById(Long id){
+        Prestador prestador = prestadorRepository.findById(id).orElse(null);
+        if(prestador == null) return null;
+        return convertToGetDTO(prestador);
+    }
 
     public PrestadorGetDTO convertToGetDTO(Prestador prestador){
         List<ProcedimentoGetDTO> procedimentosDisponiveis = new ArrayList<>();

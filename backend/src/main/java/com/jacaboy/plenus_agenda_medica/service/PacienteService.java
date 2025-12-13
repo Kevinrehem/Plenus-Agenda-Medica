@@ -66,6 +66,13 @@ public class PacienteService {
         return response;
     }
 
+    @Transactional
+    public PacienteGetDTO findPacienteById(Long id){
+        Paciente paciente = pacienteRepository.findById(id).orElse(null);
+        if (paciente == null) return null;
+        return convertToGetDTO(paciente);
+    }
+
     public PacienteGetDTO convertToGetDTO(Paciente paciente){
         return new PacienteGetDTO(
                 paciente.getId(),

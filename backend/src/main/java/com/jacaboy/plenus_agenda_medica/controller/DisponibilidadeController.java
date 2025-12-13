@@ -40,4 +40,13 @@ public class DisponibilidadeController {
         } return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/select/{id}")
+    public ResponseEntity<DisponibilidadeGetDTO> findDisponibilidadeById(@PathVariable Long id){
+        DisponibilidadeGetDTO response = disponibilidadeService.findDisponibilidadeById(id);
+        if(response == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }

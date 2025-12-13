@@ -38,4 +38,13 @@ public class ProcedimentoController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/select/{id}")
+    public ResponseEntity<ProcedimentoGetDTO> findProcedimentoById(@PathVariable Long id){
+        ProcedimentoGetDTO response =  procedimentoService.findProcedimentoById(id);
+        if(response == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }

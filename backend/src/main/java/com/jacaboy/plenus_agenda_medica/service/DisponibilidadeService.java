@@ -52,6 +52,13 @@ public class DisponibilidadeService {
         return response;
     }
 
+    @Transactional
+    public DisponibilidadeGetDTO findDisponibilidadeById(Long id){
+        Disponibilidade disponibilidade = disponibilidadeRepository.findById(id).orElse(null);
+        if(disponibilidade == null) return null;
+        return convertToGetDTO(disponibilidade);
+    }
+
     public DisponibilidadeGetDTO convertToGetDTO(Disponibilidade disponibilidade){
         return new DisponibilidadeGetDTO(
                 disponibilidade.getId(),

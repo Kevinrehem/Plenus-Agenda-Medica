@@ -50,6 +50,13 @@ public class ProcedimentoService {
         return response;
     }
 
+    @Transactional
+    public ProcedimentoGetDTO findProcedimentoById(Long id){
+        Procedimento procedimento =  procedimentoRepository.findById(id).orElse(null);
+        if(procedimento == null) return null;
+        return convertToGetDTO(procedimento);
+    }
+
     public ProcedimentoGetDTO convertToGetDTO(Procedimento procedimento){
         return new ProcedimentoGetDTO(
                 procedimento.getId(),

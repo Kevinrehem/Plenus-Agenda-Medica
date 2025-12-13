@@ -7,6 +7,7 @@ import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorGetDTO;
 import java.util.List;
 
 public record AgendamentoGetDTO(
+        Long id,
         PrestadorGetDTO prestador,
         PacienteGetDTO paciente,
         String data_consulta,

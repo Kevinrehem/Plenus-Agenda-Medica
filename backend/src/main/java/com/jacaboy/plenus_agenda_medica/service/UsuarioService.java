@@ -40,7 +40,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public List<UsuarioGetDTO> getAllUsers(){
+    public List<UsuarioGetDTO> findAllUsers(){
         List<Usuario> usuarios = usuarioRepository.findAll();
         List<UsuarioGetDTO> result = new ArrayList<>();
         if(usuarios.isEmpty()) return null;
@@ -48,6 +48,13 @@ public class UsuarioService {
             result.add(convertToGetDTO(usuario));
         }
         return result;
+    }
+
+    @Transactional
+    public UsuarioGetDTO findUserById(Long id){
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+        if(usuario == null) return null;
+        return convertToGetDTO(usuario);
     }
 
     private UsuarioGetDTO convertToGetDTO(Usuario usuario){

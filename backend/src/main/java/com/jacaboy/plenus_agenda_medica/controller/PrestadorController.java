@@ -39,4 +39,11 @@ public class PrestadorController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/select/{id}")
+    public ResponseEntity<PrestadorGetDTO> findPrestadorById(@PathVariable Long id){
+        PrestadorGetDTO response = prestadorService.findPrestadorById(id);
+        if(response==null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }
