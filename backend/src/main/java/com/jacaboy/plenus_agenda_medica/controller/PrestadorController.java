@@ -2,6 +2,7 @@ package com.jacaboy.plenus_agenda_medica.controller;
 
 import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorCreateDTO;
 import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorGetDTO;
+import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorUpdateDTO;
 import com.jacaboy.plenus_agenda_medica.service.PrestadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,6 +45,14 @@ public class PrestadorController {
         PrestadorGetDTO response = prestadorService.findPrestadorById(id);
         if(response==null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updatePrestador(@RequestBody PrestadorUpdateDTO request){
+        boolean response =  prestadorService.updatePrestador(request);
+        if(response){
+            return ResponseEntity.status(HttpStatus.OK).body("Prestador updated successfully");
+        } return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Prestador não pode ser atualizado");
     }
 
 }

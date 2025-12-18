@@ -4,6 +4,7 @@ import com.jacaboy.plenus_agenda_medica.dto.Disponibilidade.DisponibilidadeGetDT
 import com.jacaboy.plenus_agenda_medica.dto.Procedimento.ProcedimentoGetDTO;
 import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorCreateDTO;
 import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorGetDTO;
+import com.jacaboy.plenus_agenda_medica.dto.Usuario.Prestador.PrestadorUpdateDTO;
 import com.jacaboy.plenus_agenda_medica.model.Disponibilidade;
 import com.jacaboy.plenus_agenda_medica.model.Prestador;
 import com.jacaboy.plenus_agenda_medica.model.Procedimento;
@@ -106,6 +107,39 @@ public class PrestadorService {
         Prestador prestador = prestadorRepository.findById(id).orElse(null);
         if(prestador == null) return null;
         return convertToGetDTO(prestador);
+    }
+
+    @Transactional
+    public boolean updatePrestador(PrestadorUpdateDTO request){
+        Prestador prestador = prestadorRepository.findById(request.id()).orElse(null);
+        if(prestador == null) return false;
+        if(request.nome() != null && !request.nome().isEmpty()) prestador.setNome(request.nome());
+        if(request.email() != null && !request.email().isEmpty()) prestador.setEmail(request.email());
+        if(request.cpf() != null && !request.cpf().isEmpty()) prestador.setCpf(request.cpf());
+        if(request.senha() != null && !request.senha().isEmpty()) prestador.setSenha(request.senha());
+        if(request.telefone() != null && !request.telefone().isEmpty()) prestador.setTelefone(request.telefone());
+        if(request.telefone2() != null && !request.telefone2().isEmpty())  prestador.setTelefone2(request.telefone2());
+        if(request.data_nascimento() != null && !request.data_nascimento().isEmpty()) prestador.setDataNascimento(LocalDate.parse(request.data_nascimento()));
+        if(request.crbm() != null && !request.crbm().isEmpty()) prestador.setCrbm(request.crbm());
+        if(request.disponibilidade_id() != null){
+            prestador.setDisponibilidade(disponibilidadeRepository.findById(request.disponibilidade_id()).orElse(null));
+            if (prestador.getDisponibilidade() == null) return false;
+        }
+        if(request.disponibilidade() != null){
+            Long id = disponibilidadeService.createDisponibilidade(request.disponibilidade());
+            Disponibilidade disponibilidade = disponibilidadeRepository.findById(id).orElse(null);
+        }
+        if(request.procedimento_ids() != null) {
+            List<Procedimento> procedimentos = new ArrayList<>();
+            for (int i = 0; i < request.procedimento_ids().length; i++) {
+                if (procedimentoRepository.existsById(request.procedimento_ids()[i])) {
+                    procedimentos.add(procedimentoRepository.findById(request.procedimento_ids()[i]).orElse(null));
+                } else return false;
+            }
+            if (!procedimentos.isEmpty()) prestador.setProcedimentosDisponiveis(procedimentos);
+        }
+        prestadorRepository.save(prestador);
+        return true;
     }
 
     public PrestadorGetDTO convertToGetDTO(Prestador prestador){
